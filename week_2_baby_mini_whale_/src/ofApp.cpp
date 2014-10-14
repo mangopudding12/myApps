@@ -3,11 +3,13 @@
 	// color change player
 	float color; 
 
-	// radius enemy  
+	// enemy 1 
 	float d2;
 	float yenemy;
 	float speed;
 	float xenemy;
+
+	// enemy 2 
 	float Speednew;
 	float xenemy2;
 	float yenemy2;
@@ -55,26 +57,20 @@ void ofApp::update(){
 	  if (ofDist (xenemy,yenemy,mouseX,mouseY) <= d1 + d2 ) 
      {
           color = 100; 
-		  speed = 0;
-		  Speednew = 0;
-		  LostGame = true; 		
-		//  LostGame2 = true; 
-        } else {
-          color = 200; 
-		  LostGame = false; 
-		  
+		  LostGame2 = true; 	
+		  HorrorSpecial = false; 
+		  } else {
+          color = 200;   
+		  LostGame2 = false; 
      }
 
-	//   if (ofDist (xenemy2,yenemy2,mouseX,mouseY) <= d1 + d3 )
-    // {
-      //    color = 100; 
-		//  Speednew = 0;
-		  //LostGame2 = true; 	
-		//  LostGame = true;  
-       // } else {
-       //   color = 200; 
-	//	  LostGame = false; 
-//		}
+	   if (ofDist (xenemy2,yenemy2,mouseX,mouseY) <= d1 + d3 )
+       {
+		  LostGame = true;  
+          } else {
+          color = 200;  
+		  LostGame = false; 
+		}
 
 	  // enemy moving 
 	  yenemy+= speed; 
@@ -105,7 +101,7 @@ void ofApp::update(){
 	  }
 
 	  if (HorrorSpecial){
-		  Speednew = 10;
+		  Speednew = 12;
 	  } else {
 		  Speednew = 0; 
 	  }
@@ -135,13 +131,22 @@ void ofApp::draw(){
 	if (LostGame){
 		Speednew = 0; 
 		speed = 0; 
+		color = 100;
 		ofSetColor(0); 
 		ofDrawBitmapString("Your are a peanut \nYour final Level: " + ofToString(Level) +		 
 			                 "\nPress mouse to restart!", 50, 200);
-	} else {
-		speed = 15; 
-	}
+	    } else {
+			speed = 15;
+	    }
 
+	if (LostGame2){
+		Speednew = 0; 
+		color = 100;
+		speed = 0; 
+		ofSetColor(0); 
+		ofDrawBitmapString("Your are a peanut \nYour final Level: " + ofToString(Level) +		 
+			                 "\nPress mouse to restart!", 50, 200);
+	    } 
 	
   
 
@@ -173,16 +178,24 @@ void ofApp::mouseDragged(int x, int y, int button){
 //--------------------------------------------------------------
 void ofApp::mousePressed(int x, int y, int button){
 // De game starts again if you press the mouse 
+	     // enemy2 
 		 if (LostGame){
 	      Level = 0; 
-		  speed = 15; 
-		  xenemy = ofRandom (50,150);
+		  xenemy2 = ofRandom (-40,-70);
+		  yenemy2 = ofRandom (200,500);
+		  xenemy = ofRandom (100,500);
 		  yenemy = ofRandom (-20,-70);
-		  Speednew = ofRandom (15,20);
-		  xenemy2 = ofRandom (50,150);
-		  yenemy2 = ofRandom (-20,-70);
-		 } else {
-		 }
+		 } 
+
+		 // enemy 
+		 if (LostGame2){
+	      Level = 0; 
+		  xenemy = ofRandom (100,500);
+		  yenemy = ofRandom (-20,-70);
+		  xenemy2 = ofRandom (-20,-70);
+		  yenemy2 = ofRandom (200,500);
+		 } 
+
 }
 
 //--------------------------------------------------------------
