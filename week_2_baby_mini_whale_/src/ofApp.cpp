@@ -1,22 +1,23 @@
 #include "ofApp.h"
 
-	// color change player
-	float color; 
 
 	// enemy 1 
 	float d2;
 	float yenemy;
 	float speed;
 	float xenemy;
+	float color3; 
 
 	// enemy 2 
 	float Speednew;
 	float xenemy2;
 	float yenemy2;
 	float d3;
+	float color2; 
 
 	// radius player
 	float d1;
+	float color; 
 
 	// game rules 
 	bool LostGame; 
@@ -24,6 +25,7 @@
 	float Special; 
 	bool HorrorSpecial; 
 	bool LostGame2;
+	bool hasBeenTouched; 
 
 //--------------------------------------------------------------
 void ofApp::setup(){
@@ -44,6 +46,7 @@ void ofApp::setup(){
 
 	// Game rules
 	Level = 0; 
+	color2 = 100; 
 
 }
 
@@ -51,10 +54,10 @@ void ofApp::setup(){
 void ofApp::update(){
 	
 	// background 
-	ofBackground (200,100,200);
+	ofBackground (200,color2,200);
 
 	// The color change from player
-	  if (ofDist (xenemy,yenemy,mouseX,mouseY) <= d1 + d2 ) 
+	  if (ofDist (xenemy,yenemy,mouseX,mouseY) <= d1 + d2 && hasBeenTouched) 
      {
           color = 100; 
 		  LostGame2 = true; 	
@@ -64,7 +67,7 @@ void ofApp::update(){
 		  LostGame2 = false; 
      }
 
-	   if (ofDist (xenemy2,yenemy2,mouseX,mouseY) <= d1 + d3 )
+	   if (ofDist (xenemy2,yenemy2,mouseX,mouseY) <= d1 + d3 && hasBeenTouched)
        {
 		  LostGame = true;  
           } else {
@@ -106,8 +109,7 @@ void ofApp::update(){
 		  Speednew = 0; 
 	  }
 	   
-
-
+	
 
 }
 
@@ -119,9 +121,20 @@ void ofApp::draw(){
 	ofCircle (mouseX,mouseY,d1);
 
 	// enemy 
-	ofSetColor (200,0,50); 
+	ofSetColor (color2,0,color3); 
 	ofCircle (xenemy,yenemy,d2); 
+	ofSetColor (80,color3,color2);
 	ofCircle (xenemy2,yenemy2,d3); 
+
+	// froze the game 
+
+	if (hasBeenTouched){
+		
+	} else { 
+	}
+
+
+
 
 
 	// game rules level 
@@ -147,9 +160,6 @@ void ofApp::draw(){
 		ofDrawBitmapString("Your are a peanut \nYour final Level: " + ofToString(Level) +		 
 			                 "\nPress mouse to restart!", 50, 200);
 	    } 
-	
-  
-
 }
 
 //--------------------------------------------------------------
@@ -162,7 +172,8 @@ void ofApp::keyReleased(int key){
 	// radius - size enemy 
 	d2 = ofRandom (10,70);
 	xenemy-= ofRandom (0,50); 
-
+	color2 = ofRandom (30,210); 
+	color3 = ofRandom (100,250); 
 }
 
 //--------------------------------------------------------------
@@ -185,6 +196,7 @@ void ofApp::mousePressed(int x, int y, int button){
 		  yenemy2 = ofRandom (200,500);
 		  xenemy = ofRandom (100,500);
 		  yenemy = ofRandom (-20,-70);
+		  color2 = 100; 
 		 } 
 
 		 // enemy 
@@ -194,6 +206,7 @@ void ofApp::mousePressed(int x, int y, int button){
 		  yenemy = ofRandom (-20,-70);
 		  xenemy2 = ofRandom (-20,-70);
 		  yenemy2 = ofRandom (200,500);
+		  color2 = 100;
 		 } 
 
 }
