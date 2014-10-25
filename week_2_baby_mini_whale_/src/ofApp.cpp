@@ -9,9 +9,9 @@ void ofApp::setup(){
 	// enemy
 	d2 = 50;
 	yenemy = 0; 
+	speed = 15; 
 	xenemy = 300; 
 	xenemy2 = -50; 
-	speed = 15; 
 	d3 = 40; 
 
 	// SLOW 
@@ -30,11 +30,6 @@ void ofApp::setup(){
 //--------------------------------------------------------------
 void ofApp::update(){
 	
-		// background 
-	//	ofBackground (200,color2,200);
-
-
-
 	// The mmmm you lose or aaaa you go to next level code line (enemy up to down)
 	  if (ofDist (xenemy,yenemy,mouseX,mouseY) <= d1 + d2) 
      {
@@ -76,7 +71,6 @@ void ofApp::update(){
 		 }
 
 
-
 		  // enemy moving 
 		    yenemy+= speed; 
 			xenemy2+= Speednew;
@@ -93,8 +87,8 @@ void ofApp::update(){
 			 {
 				    smaller = true; 
 				    yenemy = 250;
-				    Level++;
-				    xenemy = ofRandom (150,800);
+				    Level++;				    
+					xenemy = ofRandom (150,800);
 			 }
 
 
@@ -110,14 +104,14 @@ void ofApp::update(){
 			  yenemy2 = ofRandom (200,500);
 		  }
 
-		    
+
 		  // If you get level 5 you get a new enemy from right to left 
 		  if ( (Level > 4) && (Level < 9) ) { 
 			  Speednew = 14; 
 			  d2 = ofRandom (60,75); 
 			  color2 = 90;
 			  color3 = 150; 
-
+ 
           // Speed from enemy become faster when you get level 9 
 		  } else if ((Level > 9) && (Level < 14 )){
 			  Speednew = 25; 
@@ -135,11 +129,7 @@ void ofApp::update(){
           } else {
 			  Speednew = 0; 
 		  }
-			
-		
-	   
 	
-
 }
 
 //--------------------------------------------------------------
@@ -189,9 +179,9 @@ void ofApp::draw(){
 		color = 100;
 		speed = 0; 
 		ofSetColor(0); 
-		ofDrawBitmapString("Your are a peanut \nYour final Level: " + ofToString(Level) +						   "\nPress mouse to restart!", 50, 200);
+		ofDrawBitmapString("Your are a peanut \nYour final Level: " + ofToString(Level) +						                                     "\nPress mouse to restart!", 50, 200);
 	} 
-	  
+	     
 
 }
 
@@ -203,7 +193,7 @@ void ofApp::keyPressed(int key){
 //--------------------------------------------------------------
 void ofApp::keyReleased(int key){
 	// both enemy size and color change 
-	d3 = ofRandom (20,70); 
+	d3 = ofRandom (20,70);
 	color2 = ofRandom (30,210); 
 	color3 = ofRandom (100,250); 
 }
@@ -235,6 +225,7 @@ void ofApp::mousePressed(int x, int y, int button){
 			  xenemy2 = ofRandom (-30,-70);
 			  yenemy2 = ofRandom (200,600);
 			  d3 = 40;
+			  
 		  
 			 // reset level to 0 again 
 			  Level = 0; 
@@ -252,15 +243,16 @@ void ofApp::mousePressed(int x, int y, int button){
 		 {
 			  // reset the enemy's location and size 
 			  // (enemy up down)  
-			  xenemy = ofRandom (100,900);
 			  yenemy = ofRandom (-20,-70);
+			  xenemy = ofRandom (100,900);
 			  d2 = 50; 
 
 			  // (enemy right left) 
 			 xenemy2 = ofRandom (-30,-70);
-			 yenemy2 = ofRandom (200,600);
-			  d3 = 40;
-		  
+			 
+		     yenemy2 = ofRandom (200,600);
+			 d3 = 40;
+
 			  // reset level to 0 again 
 			 Level = 0; 
 

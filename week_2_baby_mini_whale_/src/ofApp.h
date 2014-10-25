@@ -42,7 +42,7 @@ class ofApp : public ofBaseApp{
 		float Level;
 		bool LostGame2;
 		bool hasTouch; 
-		bool smaller;
+		bool smaller; 
 
 		// picutere 
 		ofImage land2;
