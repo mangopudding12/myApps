@@ -3,16 +3,16 @@
 //--------------------------------------------------------------
 void ofApp::setup(){
     // player 
-	color = 200;
+	color = 190;
     d1 = 70;
 
 	// enemy
-	d2 = 30;
+	d2 = 50;
 	yenemy = 0; 
-	speed = 15; 
 	xenemy = 300; 
 	xenemy2 = -50; 
-	d3 = 30; 
+	speed = 15; 
+	d3 = 40; 
 
 	// SLOW 
 	ofSetFrameRate (40);
@@ -21,9 +21,10 @@ void ofApp::setup(){
 	Level = 0; 
 	color2 = 100; 
 	hasTouch = false; 
+	smaller = false; 
 
 	// picutere 
-	MM.loadImage("MM.png");
+	land2.loadImage("land2.png");
 }
 
 //--------------------------------------------------------------
@@ -38,7 +39,6 @@ void ofApp::update(){
 	  if (ofDist (xenemy,yenemy,mouseX,mouseY) <= d1 + d2) 
      {
 		  // This is the you have lose part 
-            color = 100; 
 		    LostGame2 = true; 	
 		    hasTouch = true; 
 	      }
@@ -52,19 +52,6 @@ void ofApp::update(){
 	      else {
              color = 200;   
 		     LostGame2 = false; 
-
-		  // If you get level 5 you get a new enemy from right to left 
-		  if ( Level > 5) { 
-			  Speednew = 14; 
-
-          // Speed from enemy become faster when you get level 9 
-		  } else if (Level > 9){
-			  Speednew = 20;
-
-          // When are lower than level 5 you don't you 2 enemy's 
-          } else {
-			  Speednew = 0; 
-		  }
       }
 
 
@@ -96,24 +83,60 @@ void ofApp::update(){
 
 
 		  // enemy fall out the screen (enemy up to down)
-		  if (yenemy > 600)
-		  {
-			  yenemy = ofRandom (10,100);
-			  Level++;
-			  xenemy = ofRandom (20,570);
-		  }
+		  if ((yenemy > 700) && (Level < 14) )
+		  { 
+			       yenemy = ofRandom (-50,150);
+				   Level++;
+				   xenemy = ofRandom (100,900);
+			 }
+			   else if ((yenemy > 580) && (Level >= 14))
+			 {
+				    smaller = true; 
+				    yenemy = 250;
+				    Level++;
+				    xenemy = ofRandom (150,800);
+			 }
 
 
 		  // (enemy right to left) fall out the screen  
-		  if (xenemy2 > 600)
+		  if ((xenemy2 > 1000) && (Level < 14))
 		  {
 			  xenemy2 = 0;
-			  yenemy2 = ofRandom (10,570);
+			  yenemy2 = ofRandom (100,600);
+		  } 
+		  else if ((xenemy2 > 800) && (Level >= 14))
+		  {
+			  xenemy2 = 200; 
+			  yenemy2 = ofRandom (200,500);
 		  }
 
-		
+		    
+		  // If you get level 5 you get a new enemy from right to left 
+		  if ( (Level > 4) && (Level < 9) ) { 
+			  Speednew = 14; 
+			  d2 = ofRandom (60,75); 
+			  color2 = 90;
+			  color3 = 150; 
 
+          // Speed from enemy become faster when you get level 9 
+		  } else if ((Level > 9) && (Level < 14 )){
+			  Speednew = 25; 
+			  d2 = ofRandom (80,120);
+			  color2 = 200;
+			  color3 = 250; 
+
+		  } else if ( Level >= 14){
+			  d2 = ofRandom (30,45);
+			  color2 = 110;
+			  color3 = 215; 
+			  Speednew = ofRandom (25,28);
+	
+          // When are lower than level 5 you don't you 2 enemy's 
+          } else {
+			  Speednew = 0; 
+		  }
 			
+		
 	   
 	
 
@@ -122,6 +145,12 @@ void ofApp::update(){
 //--------------------------------------------------------------
 void ofApp::draw(){
 	
+	    // draw the picture when you are at level 14
+	    if (smaller) {
+        ofSetColor(255,255,255);
+	    land2.draw(0,0);
+		} 
+
 		// player 
 		ofSetColor (90,color,color);
 		ofCircle (mouseX,mouseY,d1);
@@ -162,10 +191,7 @@ void ofApp::draw(){
 		ofSetColor(0); 
 		ofDrawBitmapString("Your are a peanut \nYour final Level: " + ofToString(Level) +						   "\nPress mouse to restart!", 50, 200);
 	} 
-	      // I have a picture problem oooo noooo help me it is a monster really 
-	 //if (Level > 13) {
-		   MM.draw(300,300,400,400);
-		//   }
+	  
 
 }
 
@@ -177,8 +203,7 @@ void ofApp::keyPressed(int key){
 //--------------------------------------------------------------
 void ofApp::keyReleased(int key){
 	// both enemy size and color change 
-	d2 = ofRandom (10,50);
-	d3 = ofRandom (10,50); 
+	d3 = ofRandom (20,70); 
 	color2 = ofRandom (30,210); 
 	color3 = ofRandom (100,250); 
 }
@@ -202,14 +227,14 @@ void ofApp::mousePressed(int x, int y, int button){
 		 {
 			 // reset the enemy's location and size 
 			 // (enemy up down)  
-			 xenemy = ofRandom (100,500);
+			 xenemy = ofRandom (100,1000);
 			 yenemy = ofRandom (-20,-70);
-			 d2 = 30; 
+			 d2 = 50; 
 
 			 // (enemy right left) 
 			  xenemy2 = ofRandom (-30,-70);
-			  yenemy2 = ofRandom (200,500);
-			  d3 = 30;
+			  yenemy2 = ofRandom (200,600);
+			  d3 = 40;
 		  
 			 // reset level to 0 again 
 			  Level = 0; 
@@ -227,14 +252,14 @@ void ofApp::mousePressed(int x, int y, int button){
 		 {
 			  // reset the enemy's location and size 
 			  // (enemy up down)  
-			  xenemy = ofRandom (100,500);
+			  xenemy = ofRandom (100,900);
 			  yenemy = ofRandom (-20,-70);
-			  d2 = 30; 
+			  d2 = 50; 
 
 			  // (enemy right left) 
 			 xenemy2 = ofRandom (-30,-70);
-			 yenemy2 = ofRandom (200,500);
-			  d3 = 30;
+			 yenemy2 = ofRandom (200,600);
+			  d3 = 40;
 		  
 			  // reset level to 0 again 
 			 Level = 0; 
