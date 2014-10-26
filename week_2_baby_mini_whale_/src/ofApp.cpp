@@ -76,6 +76,7 @@ void ofApp::update(){
 			xenemy2+= Speednew;
 
 
+
 		  // enemy fall out the screen (enemy up to down)
 		  if ((yenemy > 700) && (Level < 14) )
 		  { 
@@ -83,13 +84,16 @@ void ofApp::update(){
 				   Level++;
 				   xenemy = ofRandom (100,900);
 			 }
-			   else if ((yenemy > 580) && (Level >= 14))
+			   else if ((yenemy > 530) && (Level >= 14))
 			 {
-				    smaller = true; 
-				    yenemy = 250;
+				    yenemy = 170;
 				    Level++;				    
-					xenemy = ofRandom (150,800);
+					xenemy = ofRandom (150,850);
+					d2 = ofRandom (20,45);
+			        color2 = 110;
+			        color3 = 215; 
 			 }
+
 
 
 		  // (enemy right to left) fall out the screen  
@@ -98,11 +102,12 @@ void ofApp::update(){
 			  xenemy2 = 0;
 			  yenemy2 = ofRandom (100,600);
 		  } 
-		  else if ((xenemy2 > 800) && (Level >= 14))
+		  else if ((xenemy2 > 850) && (Level >= 14))
 		  {
-			  xenemy2 = 200; 
-			  yenemy2 = ofRandom (200,500);
+			  xenemy2 = 250; 
+			  yenemy2 = ofRandom (200,476);
 		  }
+
 
 
 		  // If you get level 5 you get a new enemy from right to left 
@@ -119,17 +124,54 @@ void ofApp::update(){
 			  color2 = 200;
 			  color3 = 250; 
 
-		  } else if ( Level >= 14){
-			  d2 = ofRandom (30,45);
-			  color2 = 110;
-			  color3 = 215; 
-			  Speednew = ofRandom (25,28);
-	
-          // When are lower than level 5 you don't you 2 enemy's 
+		  } else if ( (Level >= 14) && (Level <= 19)){
+			  Speednew = 0;
+			  xenemy2 = -60; 
+
+		  } else if ((Level > 19) && (Level < 23)){
+			  Speednew = ofRandom (18,25);
+			  d3 = 33;
+
+		  } else if (Level >= 23){
+			  d3 = 47; 
+			  Speednew = ofRandom (20,28); 
+
+          // When are lower than level 5 you don't have 2 enemy's 
           } else {
 			  Speednew = 0; 
 		  }
 	
+
+
+		  // playing field is smaller now (X)
+		  if ((mouseX > 845) && (Level >= 14)) {
+			  mouseX = 845; 
+		  }else if ((mouseX < 144) && (Level >= 14)){
+			  mouseX = 144;
+		  } 
+
+
+
+		  // playing field is smaller now (Y) 
+		  if ((mouseY > 496) && (Level >= 14)) {
+			  mouseY = 496; 
+		  }else if ((mouseY < 204) && (Level >= 14)){
+			  mouseY = 204;
+		  } 
+
+
+		  // The picture apper at level 14 
+		  if (Level > 13){
+			   smaller = true;  
+
+			   // player become smaller 
+			   d1 = 50; 
+		  } 
+
+
+
+
+
 }
 
 //--------------------------------------------------------------
@@ -140,6 +182,7 @@ void ofApp::draw(){
         ofSetColor(255,255,255);
 	    land2.draw(0,0);
 		} 
+
 
 		// player 
 		ofSetColor (90,color,color);
@@ -160,6 +203,7 @@ void ofApp::draw(){
 		ofDrawBitmapString("Level: " + ofToString(Level), 20, 20); 
 
 
+    // if (enemy up donw) is touch than you lost GAME 
 	if (LostGame)
 	{
 		Speednew = 0; 
@@ -173,6 +217,7 @@ void ofApp::draw(){
 	}
 
 
+	// if (enemy right left) is touch than you lost GAME
 	if (LostGame2)
 	{
 		Speednew = 0; 
@@ -187,15 +232,19 @@ void ofApp::draw(){
 
 //--------------------------------------------------------------
 void ofApp::keyPressed(int key){
+    //  x from (enemy up down) change &&  y from (enemy right left). 
+	xenemy += ofRandom (100,400); 
+	yenemy2 += ofRandom (150,370); 
 
 }
 
 //--------------------------------------------------------------
 void ofApp::keyReleased(int key){
-	// both enemy size and color change 
-	d3 = ofRandom (20,70);
-	color2 = ofRandom (30,210); 
-	color3 = ofRandom (100,250); 
+	// x from (enemy up down) change &&  y from (enemy right left). 
+	xenemy -= ofRandom (100,400); 
+	yenemy2 -= ofRandom (150,370); 
+
+
 }
 
 //--------------------------------------------------------------
@@ -222,7 +271,7 @@ void ofApp::mousePressed(int x, int y, int button){
 			 d2 = 50; 
 
 			 // (enemy right left) 
-			  xenemy2 = ofRandom (-30,-70);
+			  xenemy2 = ofRandom (-40,-70);
 			  yenemy2 = ofRandom (200,600);
 			  d3 = 40;
 			  
@@ -235,6 +284,9 @@ void ofApp::mousePressed(int x, int y, int button){
 
 			 // reset game frozen to game alive 
 			  hasTouch = false; 
+
+             // reset picture 
+			 smaller = false; 
 		 } 
 
 		 
@@ -247,20 +299,24 @@ void ofApp::mousePressed(int x, int y, int button){
 			  xenemy = ofRandom (100,900);
 			  d2 = 50; 
 
-			  // (enemy right left) 
-			 xenemy2 = ofRandom (-30,-70);
+			 // (enemy right left) 
+			 xenemy2 = ofRandom (-40,-70);
 			 
 		     yenemy2 = ofRandom (200,600);
 			 d3 = 40;
 
-			  // reset level to 0 again 
+			 // reset level to 0 again 
 			 Level = 0; 
 
 			 // reset the color of the player
-			  color2 = 100;
+			 color2 = 100;
 
 			 // reset game frozen to game alive 
 			 hasTouch = false; 
+
+			 // reset picture 
+			 smaller = false; 
+
 		 } 
 
 }
