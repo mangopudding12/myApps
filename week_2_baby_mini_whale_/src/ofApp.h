@@ -1,6 +1,9 @@
 #pragma once
 
 #include "ofMain.h"
+#include <iostream>
+using namespace std;
+
 
 class ofApp : public ofBaseApp{
 
@@ -18,6 +21,20 @@ class ofApp : public ofBaseApp{
 		void windowResized(int w, int h);
 		void dragEvent(ofDragInfo dragInfo);
 		void gotMessage(ofMessage msg);
+
+		///fucntions for arduino
+        void setupArduino();
+        void updateArduino();
+    
+        //allows for serial output 
+        ofSerial serial;
+
+        //an arduino object
+        ofArduino myArduino;
+
+        //this variable will only be false when the code first runs arduino
+        bool bSetupArduino;
+
 
 		// (enemy up down)
 		float d2;
@@ -43,8 +60,16 @@ class ofApp : public ofBaseApp{
 		bool LostGame2;
 		bool hasTouch; 
 		bool smaller; 
+		bool onlyOnes; 
+		 
 
 		// picutere 
 		ofImage land2;
+		ofImage pinda;
+
+		// sound 
+		ofSoundPlayer sound;
+		ofSoundPlayer sound1; 
+		
 		
 };

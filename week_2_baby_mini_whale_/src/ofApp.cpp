@@ -1,7 +1,20 @@
 #include "ofApp.h"
 
+
+
+
+
+
+
 //--------------------------------------------------------------
 void ofApp::setup(){
+
+	// mmm I don't really get what is means 
+    myArduino.connect("/dev/tty.usbmodem1421", 57600);
+    
+    //a test to see if the arduion has been set up yet?
+    bSetupArduino= false;
+
     // player 
 	color = 190;
     d1 = 70;
@@ -25,22 +38,69 @@ void ofApp::setup(){
 
 	// picutere 
 	land2.loadImage("land2.png");
+	pinda.loadImage("pinda.png");
+
+	// music
+	sound.loadSound ("woho.mp3");
+	sound1.loadSound ("boe.wav");
+	
 }
+
+     
+
+void ofApp::updateArduino(){
+	// update the arduion data ins and out
+    myArduino.update();
+}
+
+
+
+//this will set up all of my arduio pins
+void ofApp::setupArduino(){
+    myArduino.sendDigitalPinMode(9, ARD_OUTPUT);
+}
+
+
 
 //--------------------------------------------------------------
 void ofApp::update(){
 	
+		 //if my arduio is ready
+		 if ( myArduino.isArduinoReady())
+		 {
+
+			   // 1st: setup the arduino if haven't already:
+			   if (bSetupArduino == false)
+			   {
+            
+			      //this fundtion assigns the pins
+			      setupArduino();
+			      // we've starting running arduino so no need to call setup again! :)
+			      bSetupArduino = true;	// only do this once
+			   }
+        
+             // 2nd do the update of the arduino
+             updateArduino();
+        }
+
+
 	// The mmmm you lose or aaaa you go to next level code line (enemy up to down)
 	  if (ofDist (xenemy,yenemy,mouseX,mouseY) <= d1 + d2) 
      {
 		  // This is the you have lose part 
 		    LostGame2 = true; 	
 		    hasTouch = true; 
+
+			// How can you say: I want to hear this sound only one time ???????????  
+			sound1.play(); 
+			 
 	      }
 
 		  // This part say you lose game so froze everything 
 		  else if (hasTouch == true) {
 		     LostGame2 = true;
+			 sound.stop(); 
+			
 		  }
 
           // aaaa you go to next level part :) 
@@ -57,11 +117,16 @@ void ofApp::update(){
 			 // This is the you have lose part 
 			   LostGame = true;  
 			   hasTouch = true; 
+
+			 // How can you say: I want to hear this sound only one time ???????????  
+			 sound1.play(); 
 			 } 
 	   
 			 // This part say you lose game so froze everything 
 			  else if (hasTouch == true) {
 			    LostGame = true; 
+				sound.stop();
+				
 			  }
 
               // aaaa you go to next level part :) 
@@ -71,7 +136,8 @@ void ofApp::update(){
 		 }
 
 
-		  // enemy moving 
+
+		    // enemy moving 
 		    yenemy+= speed; 
 			xenemy2+= Speednew;
 
@@ -116,25 +182,34 @@ void ofApp::update(){
 			  d2 = ofRandom (60,75); 
 			  color2 = 90;
 			  color3 = 150; 
- 
+
+			  // The light of the Arduino goes on Like you are I level 5 jhee 
+			  myArduino.sendDigital(9, ARD_HIGH);
+
+			  
           // Speed from enemy become faster when you get level 9 
 		  } else if ((Level > 9) && (Level < 14 )){
 			  Speednew = 25; 
 			  d2 = ofRandom (80,120);
 			  color2 = 200;
-			  color3 = 250; 
+			  color3 = 250;
+			  myArduino.sendDigital(9, ARD_LOW);
+
 
 		  } else if ( (Level >= 14) && (Level <= 19)){
 			  Speednew = 0;
 			  xenemy2 = -60; 
+			  myArduino.sendDigital(9, ARD_HIGH);
 
 		  } else if ((Level > 19) && (Level < 23)){
 			  Speednew = ofRandom (18,25);
 			  d3 = 33;
+			  myArduino.sendDigital(9, ARD_LOW);
 
 		  } else if (Level >= 23){
 			  d3 = 47; 
 			  Speednew = ofRandom (20,28); 
+			  myArduino.sendDigital(9, ARD_HIGH);
 
           // When are lower than level 5 you don't have 2 enemy's 
           } else {
@@ -169,14 +244,19 @@ void ofApp::update(){
 		  } 
 
 
-
+		  // why plays the music when the level is 1 ??? why than ??? why not when it is level 0 ??? I don't             understand ?????????????????
+		      if (Level == 0){
+			     sound.play(); 
+			  }
 
 
 }
 
 //--------------------------------------------------------------
 void ofApp::draw(){
-	
+	    
+	   
+
 	    // draw the picture when you are at level 14
 	    if (smaller) {
         ofSetColor(255,255,255);
@@ -192,6 +272,10 @@ void ofApp::draw(){
 		// (enemy up down) 
 		ofSetColor (color2,0,color3); 
 		ofCircle (xenemy,yenemy,d2);
+
+		// why goes this wrong ?????????????? why ????? 
+		//ofSetColor(255,255,255);
+		//pinda.draw(xenemy,yenemy,d2);
 
 		// (enemy right left)
 		ofSetColor (80,color3,color2);
@@ -275,7 +359,6 @@ void ofApp::mousePressed(int x, int y, int button){
 			  yenemy2 = ofRandom (200,600);
 			  d3 = 40;
 			  
-		  
 			 // reset level to 0 again 
 			  Level = 0; 
 
