@@ -49,6 +49,7 @@ class ofApp : public ofBaseApp{
 		float yenemy2;
 		float d3;
 		float color2; 
+		float d4; 
 
 		// radius player
 		float d1;

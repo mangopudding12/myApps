@@ -24,8 +24,9 @@ void ofApp::setup(){
 	yenemy = 0; 
 	speed = 15; 
 	xenemy = 300; 
-	xenemy2 = -50; 
-	d3 = 40; 
+	xenemy2 = -70; 
+	d3 = 15; 
+	
 
 	// SLOW 
 	ofSetFrameRate (40);
@@ -43,6 +44,7 @@ void ofApp::setup(){
 	// music
 	sound.loadSound ("woho.mp3");
 	sound1.loadSound ("boe.wav");
+	sound.play(); 
 	
 }
 
@@ -120,6 +122,8 @@ void ofApp::update(){
 
 			 // How can you say: I want to hear this sound only one time ???????????  
 			 sound1.play(); 
+			 // I must make a bool swits !!!! 
+
 			 } 
 	   
 			 // This part say you lose game so froze everything 
@@ -243,13 +247,7 @@ void ofApp::update(){
 			   d1 = 50; 
 		  } 
 
-
-		  // why plays the music when the level is 1 ??? why than ??? why not when it is level 0 ??? I don't             understand ?????????????????
-		      if (Level == 0){
-			     sound.play(); 
-			  }
-
-
+		  		  
 }
 
 //--------------------------------------------------------------
@@ -273,13 +271,13 @@ void ofApp::draw(){
 		ofSetColor (color2,0,color3); 
 		ofCircle (xenemy,yenemy,d2);
 
-		// why goes this wrong ?????????????? why ????? 
-		//ofSetColor(255,255,255);
-		//pinda.draw(xenemy,yenemy,d2);
+		// (enemy right left) why is this working ???? because there is no d3 ?? so how is it possible it               that is know when he touch the player ??? How can this enemy know that ??? it is weird 
+		ofSetColor(255,255,255);
+		pinda.draw(xenemy2-85,yenemy2-60,150,150);
 
 		// (enemy right left)
-		ofSetColor (80,color3,color2);
-		ofCircle (xenemy2,yenemy2,d3); 
+		//ofSetColor (80,color3,color2);
+		//ofCircle (xenemy2,yenemy2,d3); 
 
 	
 		// game rules level 
@@ -361,6 +359,7 @@ void ofApp::mousePressed(int x, int y, int button){
 			  
 			 // reset level to 0 again 
 			  Level = 0; 
+			  sound.play(); 
 
 			  // reset the color of the player
 			  color2 = 100;
@@ -390,6 +389,7 @@ void ofApp::mousePressed(int x, int y, int button){
 
 			 // reset level to 0 again 
 			 Level = 0; 
+			 sound.play(); 
 
 			 // reset the color of the player
 			 color2 = 100;
