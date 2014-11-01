@@ -71,6 +71,7 @@ class ofApp : public ofBaseApp{
 		// sound 
 		ofSoundPlayer sound;
 		ofSoundPlayer sound1; 
-		
+		bool muziek; 
+		bool muziek1; 
 		
 };

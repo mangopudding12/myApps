@@ -45,7 +45,8 @@ void ofApp::setup(){
 	sound.loadSound ("woho.mp3");
 	sound1.loadSound ("boe.wav");
 	sound.play(); 
-	
+	muziek = false; 
+	muziek1 = false; 
 }
 
      
@@ -91,24 +92,39 @@ void ofApp::update(){
      {
 		  // This is the you have lose part 
 		    LostGame2 = true; 	
-		    hasTouch = true; 
+			
+			/// please help me I have trying everything but I can't get what I want. with the cow                           noise ????????????????????????????????????
+			muziek = true; 
+			if (muziek1)
+			{
+				   sound1.play();
+				   muziek1 = false; 
+		    }
 
-			// How can you say: I want to hear this sound only one time ???????????  
-			sound1.play(); 
-			 
+
+			hasTouch = true;  
 	      }
 
 		  // This part say you lose game so froze everything 
 		  else if (hasTouch == true) {
-		     LostGame2 = true;
+                
+			  
+			  /// please help me I have trying everything but I can't get what I want. with the cow                           noise ???????????????????????????
+			  if (muziek)
+			  {
+				   sound1.play();
+				   muziek = false; 
+			  }
+
+			 LostGame2 = true;
 			 sound.stop(); 
-			
-		  }
+		  } 
 
           // aaaa you go to next level part :) 
 	      else {
              color = 200;   
 		     LostGame2 = false; 
+			 
       }
 
 
@@ -118,20 +134,14 @@ void ofApp::update(){
         {
 			 // This is the you have lose part 
 			   LostGame = true;  
-			   hasTouch = true; 
-
-			 // How can you say: I want to hear this sound only one time ???????????  
-			 sound1.play(); 
-			 // I must make a bool swits !!!! 
-
+			   hasTouch = true;
 			 } 
 	   
 			 // This part say you lose game so froze everything 
 			  else if (hasTouch == true) {
 			    LostGame = true; 
 				sound.stop();
-				
-			  }
+			  } 
 
               // aaaa you go to next level part :) 
 			  else { 
@@ -252,6 +262,7 @@ void ofApp::update(){
 
 //--------------------------------------------------------------
 void ofApp::draw(){
+
 	    
 	   
 
