@@ -9,8 +9,8 @@
 //--------------------------------------------------------------
 void ofApp::setup(){
 
-	// mmm I don't really get what is means 
-    myArduino.connect("/dev/tty.usbmodem1421", 57600);
+	// this is computer port 
+    myArduino.connect("COM5", 57600);
     
     //a test to see if the arduion has been set up yet?
     bSetupArduino= false;
@@ -45,8 +45,12 @@ void ofApp::setup(){
 	sound.loadSound ("woho.mp3");
 	sound1.loadSound ("boe.wav");
 	sound.play(); 
-	muziek = false; 
-	muziek1 = false; 
+	muziek = true; 
+
+	// timekeper
+	begintime1 = 0; 
+	begintime2 = 0; 
+	
 }
 
      
@@ -60,8 +64,14 @@ void ofApp::updateArduino(){
 
 //this will set up all of my arduio pins
 void ofApp::setupArduino(){
+
+	// green light = your life or you are dead 
     myArduino.sendDigitalPinMode(9, ARD_OUTPUT);
-}
+
+	// yellow lights = There is comming a new difficult part of the game 
+	myArduino.sendDigitalPinMode(6, ARD_OUTPUT);
+	myArduino.sendDigitalPinMode(5, ARD_OUTPUT);
+	}
 
 
 
@@ -87,67 +97,91 @@ void ofApp::update(){
         }
 
 
+
 	// The mmmm you lose or aaaa you go to next level code line (enemy up to down)
 	  if (ofDist (xenemy,yenemy,mouseX,mouseY) <= d1 + d2) 
-     {
-		  // This is the you have lose part 
+        {
+		    // This is the you have lose part 
 		    LostGame2 = true; 	
+
+		    // this the code for the light
+			myArduino.sendDigital(9, ARD_HIGH);
+			myArduino.sendDigital(5,ARD_HIGH);
+			myArduino.sendDigital(6,ARD_HIGH);
 			
-			/// please help me I have trying everything but I can't get what I want. with the cow                           noise ????????????????????????????????????
-			muziek = true; 
-			if (muziek1)
-			{
-				   sound1.play();
-				   muziek1 = false; 
-		    }
-
-
-			hasTouch = true;  
-	      }
-
-		  // This part say you lose game so froze everything 
-		  else if (hasTouch == true) {
-                
-			  
-			  /// please help me I have trying everything but I can't get what I want. with the cow                           noise ???????????????????????????
-			  if (muziek)
-			  {
+	        // muziek is true by setup so now you hear the noise one time 
+			if (muziek)
+			    {
 				   sound1.play();
 				   muziek = false; 
-			  }
+			    }
 
+			hasTouch = true;  
+	    }
+
+		  // This part say you lose game so froze everything 
+		  else if (hasTouch == true) 
+		  {
 			 LostGame2 = true;
 			 sound.stop(); 
+
+			 // this the code for the light yellow 
+			        begintime1 = 0; 
+					begintime2 = 0; 
+
+					myArduino.sendDigital(5,ARD_HIGH); 
+					myArduino.sendDigital(6,ARD_HIGH); 
 		  } 
 
           // aaaa you go to next level part :) 
-	      else {
+	      else 
+		  {
              color = 200;   
 		     LostGame2 = false; 
-			 
-      }
+          }
 
 
 
        // The mmmm you lose or aaaa you go to next level code line (enemy right to left)
 	   if (ofDist (xenemy2,yenemy2,mouseX,mouseY) <= d1 + d3)
-        {
+           {
 			 // This is the you have lose part 
 			   LostGame = true;  
+
+			 // This is the code for the light 
+			   myArduino.sendDigital(9, ARD_HIGH);
+			   myArduino.sendDigital(5,ARD_HIGH);
+			   myArduino.sendDigital(6,ARD_HIGH);
+
+					if (muziek)
+				     {
+					   sound1.play();
+					   muziek = false; 
+					 }
 			   hasTouch = true;
-			 } 
+		  } 
 	   
 			 // This part say you lose game so froze everything 
-			  else if (hasTouch == true) {
-			    LostGame = true; 
-				sound.stop();
-			  } 
+			  else if (hasTouch == true) 
+			    {
+					LostGame = true; 
+					sound.stop();
+				
+					// this the code for the light yellow 
+			        begintime1 = 0; 
+					begintime2 = 0; 
+
+					myArduino.sendDigital(5,ARD_HIGH); 
+					myArduino.sendDigital(6,ARD_HIGH); 
+			   } 
 
               // aaaa you go to next level part :) 
-			  else { 
+			 else
+			 { 
 			    color = 200;  
 			    LostGame = false;
-		 }
+		     }
+
 
 
 
@@ -191,43 +225,84 @@ void ofApp::update(){
 
 
 		  // If you get level 5 you get a new enemy from right to left 
-		  if ( (Level > 4) && (Level < 9) ) { 
-			  Speednew = 14; 
-			  d2 = ofRandom (60,75); 
-			  color2 = 90;
-			  color3 = 150; 
+		  if ( (Level > 4) && (Level < 9) ) 
+		  { 
+			    Speednew = 14; 
+			    d2 = ofRandom (60,75); 
+			    color2 = 90;
+			    color3 = 150; 
 
-			  // The light of the Arduino goes on Like you are I level 5 jhee 
-			  myArduino.sendDigital(9, ARD_HIGH);
+			  // light number 3 yellow slow bliking -- first 
+			   endtime1 = 30; 
+			   g1 = 60; 
 
-			  
+			   if ((begintime1 < endtime1) && (begintime1 < g1))
+			   {
+			       myArduino.sendDigital(5,ARD_HIGH);  
+			      }else if ((begintime1 >= endtime1) && (begintime1 < g1)) { 
+				  myArduino.sendDigital(5, ARD_LOW);
+			      }else {
+				  begintime1 = 0; 
+		       }
+
+			  // light number 2 yellow not slow blinking -- two 
+				   endtime2 = 20; 
+			       g2 = 40; 
+
+			      if ((begintime2 < endtime2) && (begintime2 < g2))
+			       {
+			          myArduino.sendDigital(6,ARD_HIGH);  
+			          }else if ((begintime2 >= endtime2) && (begintime2 < g2)) { 
+				      myArduino.sendDigital(6, ARD_LOW);
+			          }else {
+				      begintime2 = 0; 
+		           }
+
           // Speed from enemy become faster when you get level 9 
 		  } else if ((Level > 9) && (Level < 14 )){
 			  Speednew = 25; 
 			  d2 = ofRandom (80,120);
 			  color2 = 200;
 			  color3 = 250;
-			  myArduino.sendDigital(9, ARD_LOW);
-
 
 		  } else if ( (Level >= 14) && (Level <= 19)){
 			  Speednew = 0;
 			  xenemy2 = -60; 
-			  myArduino.sendDigital(9, ARD_HIGH);
 
 		  } else if ((Level > 19) && (Level < 23)){
 			  Speednew = ofRandom (18,25);
 			  d3 = 33;
-			  myArduino.sendDigital(9, ARD_LOW);
 
 		  } else if (Level >= 23){
 			  d3 = 47; 
 			  Speednew = ofRandom (20,28); 
-			  myArduino.sendDigital(9, ARD_HIGH);
-
+			
           // When are lower than level 5 you don't have 2 enemy's 
+		  // Here is also light blinking stuff
           } else {
 			  Speednew = 0; 
+
+			   if ((begintime1 < endtime1) && (begintime1 < g1))
+			   {
+			       myArduino.sendDigital(5,ARD_HIGH);  
+			      }else if ((begintime1 >= endtime1) && (begintime1 < g1)) { 
+				  myArduino.sendDigital(5, ARD_LOW);
+			      }else {
+				  begintime1 = 0; 
+		       }
+
+			  // light number 2 yellow not slow blinking -- two 
+				   endtime2 = 20; 
+			       g2 = 40; 
+
+			      if ((begintime2 < endtime2) && (begintime2 < g2))
+			       {
+			          myArduino.sendDigital(6,ARD_HIGH);  
+			          }else if ((begintime2 >= endtime2) && (begintime2 < g2)) { 
+				      myArduino.sendDigital(6, ARD_LOW);
+			          }else {
+				      begintime2 = 0; 
+		           }
 		  }
 	
 
@@ -250,21 +325,42 @@ void ofApp::update(){
 
 
 		  // The picture apper at level 14 
-		  if (Level > 13){
+		  if (Level > 13)
+		  {
 			   smaller = true;  
-
 			   // player become smaller 
 			   d1 = 50; 
 		  } 
+
+		  if ((Level > 0 ) && (Level < 4)){
+			  begintime1++; 
+		  }else if ((Level > 4) && (Level < 9)){
+			  begintime1 ++;
+		  } else { 
+			  begintime1 = 31; 
+		  } 
+
+		  if ((Level > 1) && (Level < 4)){
+		      begintime2 ++;
+		  }else if ((Level >= 7) && (Level < 9)){
+			  begintime2 ++; 
+		  } else {
+			  begintime2 = 21; 
+		  } 
+
+
+
+
+
+
+
+
 
 		  		  
 }
 
 //--------------------------------------------------------------
 void ofApp::draw(){
-
-	    
-	   
 
 	    // draw the picture when you are at level 14
 	    if (smaller) {
@@ -380,6 +476,12 @@ void ofApp::mousePressed(int x, int y, int button){
 
              // reset picture 
 			 smaller = false; 
+			 muziek = true; 
+
+			 // reset lights
+			 myArduino.sendDigital(5,ARD_LOW); 
+			 myArduino.sendDigital(6,ARD_LOW); 
+			 myArduino.sendDigital(9, ARD_LOW);
 		 } 
 
 		 
@@ -410,7 +512,12 @@ void ofApp::mousePressed(int x, int y, int button){
 
 			 // reset picture 
 			 smaller = false; 
+			 muziek = true; 
 
+			 // reset lights 
+			 myArduino.sendDigital(5,ARD_LOW); 
+			 myArduino.sendDigital(6,ARD_LOW); 
+			 myArduino.sendDigital(9, ARD_LOW);
 		 } 
 
 }

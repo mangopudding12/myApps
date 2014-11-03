@@ -73,5 +73,20 @@ class ofApp : public ofBaseApp{
 		ofSoundPlayer sound1; 
 		bool muziek; 
 		bool muziek1; 
-		
+
+		// time keper 
+		int begintime1; 
+		int begintime2;
+
+		int endtime1; 
+		int endtime2;
+
+		float g1;
+		float g2;
+	
+		// I want that the 3 light all begin on a ather time with blinking 
+		bool light1; 
+		bool light2; 
+
+
 };
