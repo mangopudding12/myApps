@@ -1,11 +1,5 @@
 #include "ofApp.h"
 
-
-
-
-
-
-
 //--------------------------------------------------------------
 void ofApp::setup(){
 
@@ -33,7 +27,7 @@ void ofApp::setup(){
 
 	// Game rules
 	Level = 0; 
-	color2 = 100; 
+	// color2 = 100; 
 	hasTouch = false; 
 	smaller = false; 
 
@@ -44,13 +38,30 @@ void ofApp::setup(){
 	// music
 	sound.loadSound ("woho.mp3");
 	sound1.loadSound ("boe.wav");
+	sound2.loadSound ("laugh.wav");
+
 	sound.play(); 
 	muziek = true; 
+	title = true; 
 
 	// timekeper
 	begintime1 = 0; 
 	begintime2 = 0; 
 	
+	//// the player en enemy's create
+ //   names.push_back("player");
+ //   names.push_back("enemy");
+ //   names.push_back("peanut");
+
+
+
+	//for () { 
+
+	//}
+
+
+
+
 }
 
      
@@ -88,6 +99,7 @@ void ofApp::update(){
             
 			      //this fundtion assigns the pins
 			      setupArduino();
+				 
 			      // we've starting running arduino so no need to call setup again! :)
 			      bSetupArduino = true;	// only do this once
 			   }
@@ -95,8 +107,6 @@ void ofApp::update(){
              // 2nd do the update of the arduino
              updateArduino();
         }
-
-
 
 	// The mmmm you lose or aaaa you go to next level code line (enemy up to down)
 	  if (ofDist (xenemy,yenemy,mouseX,mouseY) <= d1 + d2) 
@@ -128,7 +138,7 @@ void ofApp::update(){
 			 // this the code for the light yellow 
 			        begintime1 = 0; 
 					begintime2 = 0; 
-
+					
 					myArduino.sendDigital(5,ARD_HIGH); 
 					myArduino.sendDigital(6,ARD_HIGH); 
 		  } 
@@ -170,7 +180,7 @@ void ofApp::update(){
 					// this the code for the light yellow 
 			        begintime1 = 0; 
 					begintime2 = 0; 
-
+			
 					myArduino.sendDigital(5,ARD_HIGH); 
 					myArduino.sendDigital(6,ARD_HIGH); 
 			   } 
@@ -265,6 +275,7 @@ void ofApp::update(){
 			  color2 = 200;
 			  color3 = 250;
 
+
 		  } else if ( (Level >= 14) && (Level <= 19)){
 			  Speednew = 0;
 			  xenemy2 = -60; 
@@ -276,33 +287,24 @@ void ofApp::update(){
 		  } else if (Level >= 23){
 			  d3 = 47; 
 			  Speednew = ofRandom (20,28); 
-			
+
+			  // When you are in level 23 
+			  if (title && (LostGame || LostGame2))
+			    {
+                   cout <<"" << endl;
+				   cout << "OOOO MIJN GOD" << endl;
+			       cout << "YOU ARE TO AWESOME COMING ABOVE LEVEL 23" << endl;
+			       cout << "IF I where you I SHALL BAY ICECREEM NOW AND DANCE" << endl;
+			       cout << "AAAAA I CAN TALK TO YOU that is scarry hihi" << endl;
+			       cout << "now you get nightmeres and little sweet kittens" << endl;
+			       cout << "I will stop talking. YOU STILL AWESOME" << endl;
+				   sound2.play(); 
+				 title = false; 
+			    }
+	
           // When are lower than level 5 you don't have 2 enemy's 
-		  // Here is also light blinking stuff
           } else {
 			  Speednew = 0; 
-
-			   if ((begintime1 < endtime1) && (begintime1 < g1))
-			   {
-			       myArduino.sendDigital(5,ARD_HIGH);  
-			      }else if ((begintime1 >= endtime1) && (begintime1 < g1)) { 
-				  myArduino.sendDigital(5, ARD_LOW);
-			      }else {
-				  begintime1 = 0; 
-		       }
-
-			  // light number 2 yellow not slow blinking -- two 
-				   endtime2 = 20; 
-			       g2 = 40; 
-
-			      if ((begintime2 < endtime2) && (begintime2 < g2))
-			       {
-			          myArduino.sendDigital(6,ARD_HIGH);  
-			          }else if ((begintime2 >= endtime2) && (begintime2 < g2)) { 
-				      myArduino.sendDigital(6, ARD_LOW);
-			          }else {
-				      begintime2 = 0; 
-		           }
 		  }
 	
 
@@ -332,9 +334,7 @@ void ofApp::update(){
 			   d1 = 50; 
 		  } 
 
-		  if ((Level > 0 ) && (Level < 4)){
-			  begintime1++; 
-		  }else if ((Level > 4) && (Level < 9)){
+		  if ((Level > 4) && (Level < 9)){
 			  begintime1 ++;
 		  } else { 
 			  begintime1 = 31; 
@@ -342,21 +342,10 @@ void ofApp::update(){
 
 		  if ((Level > 1) && (Level < 4)){
 		      begintime2 ++;
-		  }else if ((Level >= 7) && (Level < 9)){
-			  begintime2 ++; 
 		  } else {
 			  begintime2 = 21; 
 		  } 
 
-
-
-
-
-
-
-
-
-		  		  
 }
 
 //--------------------------------------------------------------
@@ -422,18 +411,23 @@ void ofApp::draw(){
 //--------------------------------------------------------------
 void ofApp::keyPressed(int key){
     //  x from (enemy up down) change &&  y from (enemy right left). 
-	xenemy += ofRandom (100,400); 
-	yenemy2 += ofRandom (150,370); 
+	/*xenemy += ofRandom (100,400); 
+	yenemy2 += ofRandom (150,370); */
 
 }
 
 //--------------------------------------------------------------
 void ofApp::keyReleased(int key){
 	// x from (enemy up down) change &&  y from (enemy right left). 
-	xenemy -= ofRandom (100,400); 
-	yenemy2 -= ofRandom (150,370); 
+	/*xenemy -= ofRandom (100,400); */
+	//yenemy2 -= ofRandom (150,370); 
 
-
+	// Here you can say mmm I want to begin by a other level happyness 
+	 sound.stop(); 
+	 cout << "what should the score be?" << endl;
+     cin >> Level;
+     cout << "you set the score to " << Level << endl;
+	 sound.play(); 
 }
 
 //--------------------------------------------------------------
@@ -477,6 +471,7 @@ void ofApp::mousePressed(int x, int y, int button){
              // reset picture 
 			 smaller = false; 
 			 muziek = true; 
+			 title = true; 
 
 			 // reset lights
 			 myArduino.sendDigital(5,ARD_LOW); 
@@ -513,6 +508,7 @@ void ofApp::mousePressed(int x, int y, int button){
 			 // reset picture 
 			 smaller = false; 
 			 muziek = true; 
+			 title = true; 
 
 			 // reset lights 
 			 myArduino.sendDigital(5,ARD_LOW); 

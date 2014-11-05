@@ -36,6 +36,21 @@ class ofApp : public ofBaseApp{
         bool bSetupArduino;
 
 
+		//// struct & vector for the circles (enemy's & player) 
+		//struct butterFly {
+		//	float radius; 
+		//	float speed; 
+		//	float xx; 
+		//	float yy; 
+		//	float color; 
+		//};
+
+		//const int numbutterFly = 3;
+		//vector <string> names;
+		//vector <butterFly > copyButterflys;
+
+
+
 		// (enemy up down)
 		float d2;
 		float yenemy;
@@ -71,22 +86,23 @@ class ofApp : public ofBaseApp{
 		// sound 
 		ofSoundPlayer sound;
 		ofSoundPlayer sound1; 
+	    ofSoundPlayer sound2; 
 		bool muziek; 
 		bool muziek1; 
 
 		// time keper 
 		int begintime1; 
 		int begintime2;
-
+		
 		int endtime1; 
 		int endtime2;
 
 		float g1;
 		float g2;
 	
-		// I want that the 3 light all begin on a ather time with blinking 
-		bool light1; 
-		bool light2; 
+		// is a bool for the text I written when you are higher than Level 23
+		bool title; 
+
 
 
 };
