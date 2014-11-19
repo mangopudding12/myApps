@@ -1,19 +1,35 @@
 #pragma once
-
 #include "ofMain.h"
 #include <iostream>
+// #define //NUM_CIRCLE 2
+// #define MAX_SPEED 16
 using namespace std;
 
 
-// this a struct is like a class what can hold all diffirent things like int / float / string enzo. 
-	struct Circle
-		{
-			  int x;
-			  int y;
-			  int w;
-		      int h;
-		      string name;
-		};
+
+//// this a struct is like a class what can hold all diffirent things like int / float / string enzo. 
+//	struct Circle
+//		{
+//			  int x;
+//			  int y;
+//			  int w;
+//		      int h;
+//		      string name;
+//		};
+
+struct Circle {
+    int x;
+    int y;
+    int width;
+    int height;
+	int speedy; 
+	int speedx;
+
+	// Random de speed so that it not the seem al the time 
+    };
+
+
+
 
 
 class ofApp : public ofBaseApp{
@@ -34,9 +50,10 @@ class ofApp : public ofBaseApp{
 		void gotMessage(ofMessage msg);
 		
 	
-		// mmmmm vector is still dificult to understand. I think it is something that remmenbers things for            you. Like ooooo I have 3 circles inside me and I have 3 names inside me. something like that I   
-	   // think. 
-			vector <string> names;
-			vector <Circle> circles;
+		
+
+		float speed; 
+        vector<Circle> myCircles;
+      
 
 };
