@@ -1,31 +1,18 @@
 #pragma once
 #include "ofMain.h"
 #include <iostream>
-// #define //NUM_CIRCLE 2
+
+// on this way you make a constant that you can change if you want !!!!!
+ #define NUM_CIRCLE 2
 // #define MAX_SPEED 16
 using namespace std;
-
-
-
-//// this a struct is like a class what can hold all diffirent things like int / float / string enzo. 
-//	struct Circle
-//		{
-//			  int x;
-//			  int y;
-//			  int w;
-//		      int h;
-//		      string name;
-//		};
 
 struct Circle {
     int x;
     int y;
     int width;
-    int height;
 	int speedy; 
 	int speedx;
-
-	// Random de speed so that it not the seem al the time 
     };
 
 
@@ -54,6 +41,13 @@ class ofApp : public ofBaseApp{
 
 		float speed; 
         vector<Circle> myCircles;
-      
+
+		// this size of the player
+		float d_player; 
+
+		// bool switch 
+		bool saus; 
+		float k; 
+		
 
 };

@@ -113,7 +113,7 @@ void ofApp::update(){
         {
 		    // This is the you have lose part 
 		    LostGame2 = true; 	
-
+			cout << "hey hellen ik ben de computer" << endl; 
 		    // this the code for the light
 			myArduino.sendDigital(9, ARD_HIGH);
 			myArduino.sendDigital(5,ARD_HIGH);
