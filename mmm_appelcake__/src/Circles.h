@@ -35,9 +35,6 @@ class Circles
 	  float y; 
 	  float speed; 
 
-	  // bounce of the arc(hoek) of the screen. 
-	  void bounce();
-  
   // place for private functions or variables 
   private: 
 
