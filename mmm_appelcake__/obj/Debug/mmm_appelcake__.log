@@ -1,7 +1,7 @@
-﻿Build started 6-12-2014 11:57:22.
+﻿Build started 13-12-2014 10:30:12.
      1>Project "C:\Users\dipsausje\Desktop\Documents\of_v0.8.4_vs_release\apps\myApps\mmm_appelcake__\mmm_appelcake__.vcxproj" on node 2 (Build target(s)).
      1>ClCompile:
-         C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin\CL.exe /c /I..\..\..\libs\openFrameworks /I..\..\..\libs\openFrameworks\graphics /I..\..\..\libs\openFrameworks\app /I..\..\..\libs\openFrameworks\sound /I..\..\..\libs\openFrameworks\utils /I..\..\..\libs\openFrameworks\communication /I..\..\..\libs\openFrameworks\video /I..\..\..\libs\openFrameworks\types /I..\..\..\libs\openFrameworks\math /I..\..\..\libs\openFrameworks\3d /I..\..\..\libs\openFrameworks\gl /I..\..\..\libs\openFrameworks\events /I..\..\..\libs\glut\include /I..\..\..\libs\rtAudio\include /I..\..\..\libs\quicktime\include /I..\..\..\libs\freetype\include /I..\..\..\libs\freetype\include\freetype2 /I..\..\..\libs\freeImage\include /I..\..\..\libs\fmodex\include /I..\..\..\libs\videoInput\include /I..\..\..\libs\glew\include\ /I..\..\..\libs\glu\include /I..\..\..\libs\tess2\include /I..\..\..\libs\cairo\include\cairo /I..\..\..\libs\poco\include /I..\..\..\libs\glfw\include /I..\..\..\libs\openssl\include /I..\..\..\addons /Isrc /ZI /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /D POCO_STATIC /D CAIRO_WIN32_STATIC_BUILD /D DISABLE_SOME_FLOATING_POINT /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"obj\Debug\\" /Fd"obj\Debug\vc110.pdb" /Gd /TP /analyze- /errorReport:prompt src\Circles.cpp src\main.cpp src\ofApp.cpp
+         C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin\CL.exe /c /I..\..\..\libs\openFrameworks /I..\..\..\libs\openFrameworks\graphics /I..\..\..\libs\openFrameworks\app /I..\..\..\libs\openFrameworks\sound /I..\..\..\libs\openFrameworks\utils /I..\..\..\libs\openFrameworks\communication /I..\..\..\libs\openFrameworks\video /I..\..\..\libs\openFrameworks\types /I..\..\..\libs\openFrameworks\math /I..\..\..\libs\openFrameworks\3d /I..\..\..\libs\openFrameworks\gl /I..\..\..\libs\openFrameworks\events /I..\..\..\libs\glut\include /I..\..\..\libs\rtAudio\include /I..\..\..\libs\quicktime\include /I..\..\..\libs\freetype\include /I..\..\..\libs\freetype\include\freetype2 /I..\..\..\libs\freeImage\include /I..\..\..\libs\fmodex\include /I..\..\..\libs\videoInput\include /I..\..\..\libs\glew\include\ /I..\..\..\libs\glu\include /I..\..\..\libs\tess2\include /I..\..\..\libs\cairo\include\cairo /I..\..\..\libs\poco\include /I..\..\..\libs\glfw\include /I..\..\..\libs\openssl\include /I..\..\..\addons /Isrc /ZI /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /D POCO_STATIC /D CAIRO_WIN32_STATIC_BUILD /D DISABLE_SOME_FLOATING_POINT /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"obj\Debug\\" /Fd"obj\Debug\vc110.pdb" /Gd /TP /analyze- /errorReport:prompt src\Circles.cpp src\ofApp.cpp
          ofApp.cpp
      1>c:\users\dipsausje\desktop\documents\of_v0.8.4_vs_release\libs\poco\include\poco\streamconverter.h(126): warning C4250: 'Poco::InputStreamConverter' : inherits 'std::basic_istream<_Elem,_Traits>::std::basic_istream<_Elem,_Traits>::_Add_vtordisp1' via dominance
                  with
@@ -27,6 +27,23 @@
                      _Elem=char,
                      _Traits=std::char_traits<char>
                  ]
+     1>c:\users\dipsausje\desktop\documents\of_v0.8.4_vs_release\libs\openframeworks\events\ofevents.h(186): error C2039: 'mouseDragged' : is not a member of 'Circles'
+                 c:\users\dipsausje\desktop\documents\of_v0.8.4_vs_release\apps\myapps\mmm_appelcake__\src\circles.h(18) : see declaration of 'Circles'
+                 c:\users\dipsausje\desktop\documents\of_v0.8.4_vs_release\apps\myapps\mmm_appelcake__\src\ofapp.cpp(25) : see reference to function template instantiation 'void ofRegisterMouseEvents<Circles>(ListenerClass *,int)' being compiled
+                 with
+                 [
+                     ListenerClass=Circles
+                 ]
+     1>c:\users\dipsausje\desktop\documents\of_v0.8.4_vs_release\libs\openframeworks\events\ofevents.h(186): error C2065: 'mouseDragged' : undeclared identifier
+     1>c:\users\dipsausje\desktop\documents\of_v0.8.4_vs_release\libs\openframeworks\events\ofevents.h(187): error C2039: 'mouseMoved' : is not a member of 'Circles'
+                 c:\users\dipsausje\desktop\documents\of_v0.8.4_vs_release\apps\myapps\mmm_appelcake__\src\circles.h(18) : see declaration of 'Circles'
+     1>c:\users\dipsausje\desktop\documents\of_v0.8.4_vs_release\libs\openframeworks\events\ofevents.h(187): error C2065: 'mouseMoved' : undeclared identifier
+     1>c:\users\dipsausje\desktop\documents\of_v0.8.4_vs_release\libs\openframeworks\events\ofevents.h(188): error C2039: 'mousePressed' : is not a member of 'Circles'
+                 c:\users\dipsausje\desktop\documents\of_v0.8.4_vs_release\apps\myapps\mmm_appelcake__\src\circles.h(18) : see declaration of 'Circles'
+     1>c:\users\dipsausje\desktop\documents\of_v0.8.4_vs_release\libs\openframeworks\events\ofevents.h(188): error C2065: 'mousePressed' : undeclared identifier
+     1>c:\users\dipsausje\desktop\documents\of_v0.8.4_vs_release\libs\openframeworks\events\ofevents.h(189): error C2039: 'mouseReleased' : is not a member of 'Circles'
+                 c:\users\dipsausje\desktop\documents\of_v0.8.4_vs_release\apps\myapps\mmm_appelcake__\src\circles.h(18) : see declaration of 'Circles'
+     1>c:\users\dipsausje\desktop\documents\of_v0.8.4_vs_release\libs\openframeworks\events\ofevents.h(189): error C2065: 'mouseReleased' : undeclared identifier
          Circles.cpp
      1>c:\users\dipsausje\desktop\documents\of_v0.8.4_vs_release\libs\poco\include\poco\streamconverter.h(126): warning C4250: 'Poco::InputStreamConverter' : inherits 'std::basic_istream<_Elem,_Traits>::std::basic_istream<_Elem,_Traits>::_Add_vtordisp1' via dominance
                  with
@@ -52,31 +69,36 @@
                      _Elem=char,
                      _Traits=std::char_traits<char>
                  ]
+     1>c:\users\dipsausje\desktop\documents\of_v0.8.4_vs_release\apps\myapps\mmm_appelcake__\src\circles.cpp(7): error C2653: 'Circles' : is not a class or namespace name
+     1>c:\users\dipsausje\desktop\documents\of_v0.8.4_vs_release\apps\myapps\mmm_appelcake__\src\circles.cpp(8): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+     1>c:\users\dipsausje\desktop\documents\of_v0.8.4_vs_release\apps\myapps\mmm_appelcake__\src\circles.cpp(10): error C2065: 'speedx' : undeclared identifier
+     1>c:\users\dipsausje\desktop\documents\of_v0.8.4_vs_release\apps\myapps\mmm_appelcake__\src\circles.cpp(11): error C2065: 'speedy' : undeclared identifier
+     1>c:\users\dipsausje\desktop\documents\of_v0.8.4_vs_release\apps\myapps\mmm_appelcake__\src\circles.cpp(13): error C2065: 'x' : undeclared identifier
+     1>c:\users\dipsausje\desktop\documents\of_v0.8.4_vs_release\apps\myapps\mmm_appelcake__\src\circles.cpp(14): error C2065: 'y' : undeclared identifier
+     1>c:\users\dipsausje\desktop\documents\of_v0.8.4_vs_release\apps\myapps\mmm_appelcake__\src\circles.cpp(15): error C2065: 'radius' : undeclared identifier
+     1>c:\users\dipsausje\desktop\documents\of_v0.8.4_vs_release\apps\myapps\mmm_appelcake__\src\circles.cpp(16): error C2065: 'kleur' : undeclared identifier
+     1>c:\users\dipsausje\desktop\documents\of_v0.8.4_vs_release\apps\myapps\mmm_appelcake__\src\circles.cpp(17): warning C4508: 'Circles' : function should return a value; 'void' return type assumed
+     1>c:\users\dipsausje\desktop\documents\of_v0.8.4_vs_release\apps\myapps\mmm_appelcake__\src\circles.cpp(21): error C2653: 'Circles' : is not a class or namespace name
+     1>c:\users\dipsausje\desktop\documents\of_v0.8.4_vs_release\apps\myapps\mmm_appelcake__\src\circles.cpp(25): error C2065: 'x' : undeclared identifier
+     1>c:\users\dipsausje\desktop\documents\of_v0.8.4_vs_release\apps\myapps\mmm_appelcake__\src\circles.cpp(25): error C2065: 'speedx' : undeclared identifier
+     1>c:\users\dipsausje\desktop\documents\of_v0.8.4_vs_release\apps\myapps\mmm_appelcake__\src\circles.cpp(26): error C2065: 'y' : undeclared identifier
+     1>c:\users\dipsausje\desktop\documents\of_v0.8.4_vs_release\apps\myapps\mmm_appelcake__\src\circles.cpp(26): error C2065: 'speedy' : undeclared identifier
+     1>c:\users\dipsausje\desktop\documents\of_v0.8.4_vs_release\apps\myapps\mmm_appelcake__\src\circles.cpp(31): error C2065: 'y' : undeclared identifier
+     1>c:\users\dipsausje\desktop\documents\of_v0.8.4_vs_release\apps\myapps\mmm_appelcake__\src\circles.cpp(33): error C2065: 'speedy' : undeclared identifier
+     1>c:\users\dipsausje\desktop\documents\of_v0.8.4_vs_release\apps\myapps\mmm_appelcake__\src\circles.cpp(36): error C2065: 'x' : undeclared identifier
+     1>c:\users\dipsausje\desktop\documents\of_v0.8.4_vs_release\apps\myapps\mmm_appelcake__\src\circles.cpp(38): error C2065: 'speedx' : undeclared identifier
+     1>c:\users\dipsausje\desktop\documents\of_v0.8.4_vs_release\apps\myapps\mmm_appelcake__\src\circles.cpp(44): error C2653: 'Circles' : is not a class or namespace name
+     1>c:\users\dipsausje\desktop\documents\of_v0.8.4_vs_release\apps\myapps\mmm_appelcake__\src\circles.cpp(49): error C2065: 'kleur' : undeclared identifier
+     1>c:\users\dipsausje\desktop\documents\of_v0.8.4_vs_release\apps\myapps\mmm_appelcake__\src\circles.cpp(50): error C2065: 'x' : undeclared identifier
+     1>c:\users\dipsausje\desktop\documents\of_v0.8.4_vs_release\apps\myapps\mmm_appelcake__\src\circles.cpp(50): error C2065: 'y' : undeclared identifier
+     1>c:\users\dipsausje\desktop\documents\of_v0.8.4_vs_release\apps\myapps\mmm_appelcake__\src\circles.cpp(50): error C2065: 'radius' : undeclared identifier
+     1>c:\users\dipsausje\desktop\documents\of_v0.8.4_vs_release\apps\myapps\mmm_appelcake__\src\ofapp.h(16): error C2143: syntax error : missing ';' before '*'
+     1>c:\users\dipsausje\desktop\documents\of_v0.8.4_vs_release\apps\myapps\mmm_appelcake__\src\ofapp.h(16): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+     1>c:\users\dipsausje\desktop\documents\of_v0.8.4_vs_release\apps\myapps\mmm_appelcake__\src\ofapp.h(39): error C2143: syntax error : missing ';' before '*'
+     1>c:\users\dipsausje\desktop\documents\of_v0.8.4_vs_release\apps\myapps\mmm_appelcake__\src\ofapp.h(39): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
          Generating Code...
-         Skipping... (no relevant changes detected)
-         main.cpp
-       Link:
-         C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"bin\mmm_appelcake___debug.exe" /INCREMENTAL /NOLOGO /LIBPATH:..\..\..\libs\glut\lib\vs /LIBPATH:..\..\..\libs\glfw\lib\vs /LIBPATH:..\..\..\libs\rtAudio\lib\vs /LIBPATH:..\..\..\libs\FreeImage\lib\vs /LIBPATH:..\..\..\libs\freetype\lib\vs /LIBPATH:..\..\..\libs\quicktime\lib\vs /LIBPATH:..\..\..\libs\fmodex\lib\vs /LIBPATH:..\..\..\libs\videoInput\lib\vs /LIBPATH:..\..\..\libs\cairo\lib\vs /LIBPATH:..\..\..\libs\glew\lib\vs /LIBPATH:..\..\..\libs\glu\lib\vs /LIBPATH:..\..\..\libs\openssl\lib\vs /LIBPATH:..\..\..\libs\Poco\lib\vs /LIBPATH:..\..\..\libs\tess2\lib\vs "cairo-static.lib" "pixman-1.lib" msimg32.lib OpenGL32.lib GLu32.lib kernel32.lib setupapi.lib Vfw32.lib comctl32.lib glut32.lib rtAudioD.lib videoInputD.lib libfreetype.lib FreeImage.lib qtmlClient.lib dsound.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib glew32s.lib fmodex_vc.lib glu32.lib ssleay32MD.lib libeay32MD.lib crypt32.lib PocoFoundationmdd.lib PocoNetmdd.lib PocoUtilmdd.lib PocoXMLmdd.lib Ws2_32.lib tess2.lib glfw3.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /NODEFAULTLIB:PocoFoundationmdd.lib /NODEFAULTLIB:atlthunk.lib /NODEFAULTLIB:msvcrt /NODEFAULTLIB:libcmt /NODEFAULTLIB:LIBC /NODEFAULTLIB:LIBCMTD /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"bin\mmm_appelcake___debug.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE:NO /NXCOMPAT /IMPLIB:"bin\mmm_appelcake___debug.lib" /MACHINE:X86 /SAFESEH obj\Debug\icon.res
-         obj\Debug\Circles.obj
-         obj\Debug\main.obj
-         obj\Debug\ofApp.obj
-         C:\Users\dipsausje\Desktop\Documents\of_v0.8.4_vs_release\libs\openFrameworksCompiled\lib\vs\openframeworksLib_debug.lib
-         mmm_appelcake__.vcxproj -> C:\Users\dipsausje\Desktop\Documents\of_v0.8.4_vs_release\apps\myApps\mmm_appelcake__\bin\mmm_appelcake___debug.exe
-       PostBuildEvent:
-         xcopy /e /i /y "C:\Users\dipsausje\Desktop\Documents\of_v0.8.4_vs_release\apps\myApps\mmm_appelcake__\..\..\..\export\vs\*.dll" "C:\Users\dipsausje\Desktop\Documents\of_v0.8.4_vs_release\apps\myApps\mmm_appelcake__\bin"
-         :VCEnd
-         C:\Users\dipsausje\Desktop\Documents\of_v0.8.4_vs_release\apps\myApps\mmm_appelcake__\..\..\..\export\vs\Assimp32.dll
-         C:\Users\dipsausje\Desktop\Documents\of_v0.8.4_vs_release\apps\myApps\mmm_appelcake__\..\..\..\export\vs\fmodex.dll
-         C:\Users\dipsausje\Desktop\Documents\of_v0.8.4_vs_release\apps\myApps\mmm_appelcake__\..\..\..\export\vs\fmodexL.dll
-         C:\Users\dipsausje\Desktop\Documents\of_v0.8.4_vs_release\apps\myApps\mmm_appelcake__\..\..\..\export\vs\FreeImage.dll
-         C:\Users\dipsausje\Desktop\Documents\of_v0.8.4_vs_release\apps\myApps\mmm_appelcake__\..\..\..\export\vs\FreeType-6.dll
-         C:\Users\dipsausje\Desktop\Documents\of_v0.8.4_vs_release\apps\myApps\mmm_appelcake__\..\..\..\export\vs\glut32.dll
-         C:\Users\dipsausje\Desktop\Documents\of_v0.8.4_vs_release\apps\myApps\mmm_appelcake__\..\..\..\export\vs\libeay32.dll
-         C:\Users\dipsausje\Desktop\Documents\of_v0.8.4_vs_release\apps\myApps\mmm_appelcake__\..\..\..\export\vs\ssleay32.dll
-         C:\Users\dipsausje\Desktop\Documents\of_v0.8.4_vs_release\apps\myApps\mmm_appelcake__\..\..\..\export\vs\Zlib.dll
-         9 File(s) copied
-     1>Done Building Project "C:\Users\dipsausje\Desktop\Documents\of_v0.8.4_vs_release\apps\myApps\mmm_appelcake__\mmm_appelcake__.vcxproj" (Build target(s)).
+     1>Done Building Project "C:\Users\dipsausje\Desktop\Documents\of_v0.8.4_vs_release\apps\myApps\mmm_appelcake__\mmm_appelcake__.vcxproj" (Build target(s)) -- FAILED.
 
-Build succeeded.
+Build FAILED.
 
-Time Elapsed 00:00:22.99
+Time Elapsed 00:00:17.34

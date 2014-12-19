@@ -1,30 +1,43 @@
 
 
 #ifndef _OF_APP
-#define _OF_APP 
+#define _OF_APP
 
 #include "ofMain.h"
 #include "Circles.h"
-#define NCircles 16
+#include "Circles.cpp"
 
 class ofApp : public ofBaseApp
 {
-  public: 
-	  void setup(); 
-	  void update(); 
-	  void draw();
+public:
+    void setup();
+    void update();
+    void draw();
+    Circles *c;
 
-	  // here I give the class a name. So that you can use him !!! 
-	 /* Circles bigMother; 
-	  Circles bigMother1;
-	  Circles bigMother2; */
+	// mouse pressed functions 
+    /*void mouseReleased(ofMouseEventArgs& args);
+    void mouseMoved(ofMouseEventArgs& args);
+    void mousePressed(ofMouseEventArgs& args);
+    void mouseDragged(ofMouseEventArgs& args);
+*/
+
+	// player
+	float radiusplayer; 
+
+	// Circles class functions 
+	/*float kleur;
+    float x;
+    float y;
+    int radius;
+*/
 
 
-	  Circles bigMother[NCircles];
 
 
-  private:
-
+private:
+    Circles **bigMother;
+    int nCircless;
+    
 };
-
 #endif
